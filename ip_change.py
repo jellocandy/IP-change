@@ -53,12 +53,12 @@ def request_ip():
     service = services[i]
     try:
       start = time.time()
-      print "* Requesting current ip with '{}'".format(service.name)
+      print ("* Requesting current ip with '{}'".format(service.name))
       ip = service.ip()
-      print "* Request took {} seconds ".format(int(time.time() - start))
+      print ("* Request took {} seconds ".format(int(time.time() - start)))
       return ip
     except Exception as error:
-      print "* Exception when requesting ip using '{}': {} ".format(service.name, error )
+      print ("* Exception when requesting ip using '{}': {} ".format(service.name, error ))
       
   error = "Non available services, add more services or increase the timeout (services = {}, timeout = {}) ".format(len(services), timeout)
   raise RuntimeError(error)
@@ -77,15 +77,15 @@ if os.path.isfile(ipFile) : #File exists
 
   if request_ip != current_ip:
     save_ip(request_ip)
-    print "* IP has changed from {} to {}".format(current_ip, request_ip)
+    print ("* IP has changed from {} to {}".format(current_ip, request_ip))
     sys.exit(1)
   else :
-    print "* IP is still the same: {}".format(current_ip)
+    print ("* IP is still the same: {}".format(current_ip))
 
 else: 
   request_ip = request_ip()
   save_ip(request_ip)
-  print "* This is the first time to run the ip_change script, I will create a file in {} to store your current address: {} ".format(ipFile, request_ip)
+  print ("* This is the first time to run the ip_change script, I will create a file in {} to store your current address: {} ".format(ipFile, request_ip))
 
 #Test
 """
